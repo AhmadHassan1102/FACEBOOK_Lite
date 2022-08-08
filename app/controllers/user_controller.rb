@@ -28,7 +28,6 @@ class UserController < ApplicationController
   end
 
   def destroy
-    debugger
     session[:id] = nil     
     redirect_to '/login' 
   end 
