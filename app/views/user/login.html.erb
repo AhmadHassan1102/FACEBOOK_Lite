@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+        integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+
+
+        <%
+=begin%>
+ <script src="https://smtpjs.com/v3/smtp.js"></script> 
+<%
+=end%>
+
+
+    <%
+=begin%>
+ <!-- Font Awesome -->
+    <link rel="stylesheet" href="all.min.css">
+    <!-- AdminLTE css -->
+    <link rel="stylesheet" href="adminlte.min.css">
+    <link rel="stylesheet" href="login.css"> 
+<%
+=end%>
+</head>
+
+<body>
+
+
+    <div class="wrapper center">
+        <img class="fb_logo _8ilh img " src="https://static.xx.fbcdn.net/rsrc.php/y8/r/dF5SId3UHWd.svg" width="400" height="200" alt="Facebook">
+        <div class="card " style="width:35rem;">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card-primary">
+                            <div class="card-header">
+                                <h3 class="card-title">Login Page</h3>
+                            </div>
+                            <%
+=begin%>
+ <form action="localhost:3000/index" method = "POST">
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1" >Email address</label>
+                                        <input type="email" name="email" name="eml" class="form-control" id="exampleInputEmail1"
+                                            placeholder="Enter email">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Password</label>
+                                        <input type="password" name="password" class="form-control"
+                                            id="exampleInputPassword1" placeholder="Password">
+                                    </div>
+                                    
+                                    <td>
+                                        <input type="submit" class="btn btn-block btn-primary btn-lg bluBtn" >Login
+                                    </td>
+                                </div>
+                            </form> 
+<%
+=end%>
+<%= form_with model: @user , url: "/login" do |form| %>
+  <div>
+    <%= form.label :email %><br>
+    <%= form.text_field :email %>
+  </div>
+
+  <div>
+    <%= form.label :password %><br>
+    <%= form.password_field  :password %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
+
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                    <!--/.col (left) -->
+                    <!-- right column -->
+                    <div class="col-md-6">
+
+                    </div>
+                    <!--/.col (right) -->
+                </div>
+            </div>
+        </div>
+        <%
+=begin%>
+ <script src="jquery.validate.min.js"></script> 
+<%
+=end%>
+    </div>
+
+</body>
+
+</html>
