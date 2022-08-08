@@ -1,5 +1,5 @@
 class UserController < ApplicationController
-  def index   # when click on log in button
+  def index   
 
 
   end
