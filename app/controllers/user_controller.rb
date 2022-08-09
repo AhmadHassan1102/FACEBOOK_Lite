@@ -1,8 +1,23 @@
 class UserController < ApplicationController
   def index   
 
+  end
+
+  def register
 
   end
+
+  def saveUser 
+    # debugger
+    @user=User.new(email: params[:email], password: params[:password])
+    if @user.valid?
+      @user.save
+      redirect_to "/login"
+    else
+      redirect_to "/register"
+    end
+  end
+  
   def verifyuser
     @user = User.find_by(email: params[:user][:email], password: params[:user][:password])
     if @user
@@ -22,6 +37,7 @@ class UserController < ApplicationController
 
     if session[:id]
       @user =User.find(params[:id])
+      @all_users=User.all
     else
       redirect_to "/login"
     end
