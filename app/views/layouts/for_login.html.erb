@@ -17,23 +17,7 @@
   </head>
 
   <body class="d-flex align-items-center justify-content-center p-3 mb-2 bg-light text-dark">
- <div class="wrapper">
-  <div class="col-md-9">
-    <div class="card" style="width: 35rem">
-  <div class="card-header p-2">
-                    <ul class="nav nav-pills">
-
-                        <li class="nav-item"><a class="nav-link" href="<%= user_index_path(session[:id]) %>">Home</a>
-                        </li>
-                        <li class="nav-item"><a class="nav-link" href="<%= user_path(session[:id]) %>">Profile</a></li>
-
-                    </ul>
-                    
-                </div>
                 <%= yield %>
-                </div>
-                </div>
-                </div>
     
   </body>
 </html>
