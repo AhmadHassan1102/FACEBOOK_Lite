@@ -1,113 +1,103 @@
-<%# # Post %>
-      <div class="card-body">
-        <div class="tab-content">
-          <form action=<%="createPost" %>
+<div class="card-body">
+  <div class="tab-content">
+    <form action=<%="createPost" %>
             method="post">
-            <input type="hidden" name="authenticity_token" value="..." />
-            <div class="input-group mb-3">
-              <input
-                name="data"
+      <input type="hidden" name="authenticity_token" value="..." />
+      <div class="input-group mb-3">
+        <input name="data"
                 type="text"
                 class="form-control"
                 placeholder="What's on your mind?"
                 aria-label="Recipient's username"
                 aria-describedby="basic-addon2"
               />
-              <div class="input-group-append">
-                <button
+        <div class="input-group-append">
+          <button
                   class="input-group-text"
                   id="basic-addon2"
                   type="submit"
                 >
-                  Post
-                </button>
-              </div>
-            </div>
-          </form>
-          <% @posts.each do |p| %>
-          <div class="post " >
-            <div class="user-block " style="margin-top:20px">
-              <a href="#"><%= p.user.email%></a>
-              <br>
-              <sub><span class="description" style="margin-left:10px; " id="time"><%= p.updated_at %></span></sub>
-            </div>
-            <div class ="border border-dark text-center">
-                <p class="card-text " id="itemDes1"><%= p.data %></p>
-                <div class="mt-4 text-center" id="likbtn1">
-                <%a="white"%> <% if p.reactions.find_by(user_id: session[:id])%>
-                <%a = "blue"%> <%end%>
-
-                <a href=<%="createReaction/#{p.id}"%>
+            Post
+          </button>
+        </div>
+      </div>
+    </form>
+    <% @posts.each do |p| %>
+      <div class="post " >
+        <div class="user-block " style="margin-top:20px">
+          <a href="#"><%= p.user.email%></a>
+          <br>
+          <sub><span class="description" style="margin-left:10px; " id="time"><%= p.updated_at %></span></sub>
+        </div>
+        <div class ="border border-dark text-center">
+          <p class="card-text " id="itemDes1"><%= p.data %></p>
+          <div class="mt-4 text-center" id="likbtn1">
+            <%a="white"%> <% if p.reactions.find_by(user_id: session[:id])%>
+              <%a = "blue"%> <%end%>
+            <a href=<%="createReaction/#{p.id}"%>
                     >
-                    <i
+              <i
                     class="btn btn-secondary fas fa-thumbs-up"
                     style="color: <%= a %>"
                     >
-                    Like</i
+                Like</i
                     >
-                </a>
-
-            
-                <%# ......... %>
-
-                <i
+            </a>
+            <i
                     class="btn btn-secondary fas fa-comment"
                     data-toggle="collapse"
                     href=<%="#multiCollapseExample#{p.id}"
                     %>
                     role="button" aria-expanded="false"
                     aria-controls="multiCollapseExample1"> Comments</i>
-
-                <div class="row">
-                    <div class="col">
-                    <div class="collapse multi-collapse" id=<%="multiCollapseExample#{p.id}" %> >
-                        <div class="card card-body">
-                        <% p.comments.each do |c| %>
-                        <p><%=c.user.email%>: <%= c.data%></p>
-                        <%end%>
-                        </div>
-                        <form action=<%="createComment/#{p.id}" %>
+            <div class="row">
+              <div class="col">
+                <div class="collapse multi-collapse" id=<%="multiCollapseExample#{p.id}" %> >
+                  <div class="card card-body">
+                    <% p.comments.each do |c| %>
+                      <p><%=c.user.email%>: <%= c.data%></p>
+                    <%end%>
+                  </div>
+                  <form action=<%="createComment/#{p.id}" %>
                         method="post">
-                        <input
-                            type="hidden"
+                    <input type="hidden"
                             name="authenticity_token"
                             value="..."
                         />
-                        <div class="input-group mb-3">
-                            <input
-                            name="data"
+                    <div class="input-group mb-3">
+                      <input name="data"
                             type="text"
                             class="form-control"
                             placeholder="Write your Comment..."
                             aria-label="Recipient's username"
                             aria-describedby="basic-addon2"
                             />
-                            <div class="input-group-append">
-                            <button
+                      <div class="input-group-append">
+                        <button
                                 class="input-group-text"
                                 id="basic-addon2"
                                 type="submit"
                             >
-                                Comment
-                            </button>
-                            </div>
-                        </div>
-                        </form>
+                          Comment
+                        </button>
+                      </div>
                     </div>
-                    </div>
+                  </form>
                 </div>
-                <div class="text-center">
-                    <i style="margin: 50px" id="likCount1"
+              </div>
+            </div>
+            <div class="text-center">
+              <i style="margin: 50px" id="likCount1"
                     ><%=p.reactions.count%></i
                     >
-                    <i style="margin: 50px" id="dislikCount1"
+              <i style="margin: 50px" id="dislikCount1"
                     ><%=p.comments.count%></i
                     >
-                </div>
-                </div>   
-            </div> 
-                      <hr>    
-            <%end%>
+            </div>
           </div>
         </div>
-
+        <hr>
+      <%end%>
+    </div>
+  </div>
+</div>

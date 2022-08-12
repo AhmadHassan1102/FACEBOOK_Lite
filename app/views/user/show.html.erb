@@ -1,9 +1,7 @@
 <h1>Welcome to Facebook</h1>
-
-    <p>
-    <%=@user.email%>
-    </p>
-
+<p>
+  <%=@user.email%>
+</p>
 <%= link_to "Log out", logout_path, data: {
                 turbo_method: :delete,
                 turbo_confirm: "Surely want to logout?" } %>

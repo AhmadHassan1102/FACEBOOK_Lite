@@ -1,11 +1,9 @@
 <div class="wrapper center">
-  <img
-    class="fb_logo _8ilh img"
+  <img class="fb_logo _8ilh img"
     src="https://static.xx.fbcdn.net/rsrc.php/y8/r/dF5SId3UHWd.svg"
     width="400"
     height="200"
-    alt="Facebook"
-  />
+    alt="Facebook" />
   <div class="card" style="width: 35rem">
     <div class="container-fluid">
       <div class="row">
@@ -14,31 +12,29 @@
             <div class="card-header">
               <h3 class="card-title">Login Page</h3>
             </div>
-
             <%= form_with model: @user , url: "/login" do |form| %>
-            <div>
-              <%= form.label :email %><br />
-              <%= form.text_field :email %>
-            </div>
-
-            <div>
-              <%= form.label :password %><br />
-              <%= form.password_field :password %>
-            </div>
-            <p></p>
-            <div>
-              <%= form.submit name="Login", :class=>"btn btn-block btn-primary
+              <div>
+                <%= form.label :email %><br />
+                <%= form.text_field :email %>
+              </div>
+              <div>
+                <%= form.label :password %><br />
+                <%= form.password_field :password %>
+              </div>
+              <p></p>
+              <div>
+                <%= form.submit name="Login", :class=>"btn btn-block btn-primary
               btn-lg bluBtn"%>
-            </div>
-            <div class="card-footer">
-              <td>
-                <a
+              </div>
+              <div class="card-footer">
+                <td>
+                  <a
                   href="<%= register_path %>"
                   class="btn btn-block btn-success btn-lg grnBtn"
                   >Rehister New User!</a
                 >
-              </td>
-            </div>
+                </td>
+              </div>
             <% end %>
           </div>
           <!-- /.card -->
