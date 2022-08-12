@@ -8,7 +8,7 @@ Rails.application.routes.draw do
    
    get '/register', to: 'user#register'
    get '/login', to: 'user#login'
-   get '/logout', to: 'user#destroy'
+   delete '/logout', to: 'user#destroy'
    post '/login', to: 'user#verifyuser'
    post '/saveUser', to: 'user#saveUser'
    get '/createReaction/:id', to: 'user#createReaction'
