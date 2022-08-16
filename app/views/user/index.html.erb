@@ -32,10 +32,14 @@
         <div class ="border border-dark text-center">
           <p class="card-text " id="itemDes1"><%= p.data %></p>
           <div class="mt-4 text-center" id="likbtn1">
-          <% reac = p.reactions %>
-          <% comm = p.comments %>
-            <%a="white"%> <% if reac.find_by(user_id: current_user.id)%>
-              <%a = "blue"%> <%end%>
+            <% reac = p.reactions %>
+            <% comm = p.comments %>
+            <%a="white"%>
+            <% reac.each do |rS| %>
+              <% if rS.user_id == current_user.id %>
+                <%a = "blue"%>
+              <%end%>
+            <%end%>
             <a href=<%="//localhost:3000/createReaction/#{p.id}"%>
                     >
               <i
@@ -56,7 +60,7 @@
               <div class="col">
                 <div class="collapse multi-collapse" id=<%="multiCollapseExample#{p.id}" %> >
                   <div class="card card-body">
-                    <% comm.each do |c| %>
+                    <% p.comments.each do |c| %>
                       <p><%=c.user.email%>: <%= c.data%></p>
                     <%end%>
                   </div>
