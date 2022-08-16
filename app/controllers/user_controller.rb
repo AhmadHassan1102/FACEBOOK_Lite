@@ -1,13 +1,21 @@
 class UserController < ApplicationController
   skip_before_action :verify_authenticity_token
+  before_action :authenticate_user!
+  attr_accessor :posts_limit
+  
   def index   
     # if session[:id]
-      @posts = Post.all.order(updated_at: :desc)
+      session[:pageNo] = 0
+      @posts = Post.all.order(updated_at: :desc).limit(8).offset(session[:pageNo]*8)
     # else
     # redirect_to "/login"
     # end
   end
-
+  def pagination
+    session[:pageNo] += 1
+    @posts = Post.all.order(updated_at: :desc).limit(8).offset(session[:pageNo]*8)
+    render "index"
+  end
   # def register
   #   render "register", layout: "for_login"
   # end
@@ -44,12 +52,7 @@ class UserController < ApplicationController
   # end 
 
   def show    
-    if user_signed_in?
       @user = current_user
-      
-    else
-      redirect_to "/users/sign_in"
-    end
   end
 
   def createReaction
@@ -58,7 +61,8 @@ class UserController < ApplicationController
     else
       Reaction.create(user_id: current_user.id, post_id: params[:id])
     end
-    redirect_to "/user"
+    @posts = Post.all.order(updated_at: :desc).limit(8).offset(session[:pageNo]*8)
+    render "index"
   end
   def createComment
     
@@ -70,3 +74,4 @@ class UserController < ApplicationController
     redirect_to "/user"
   end
 end
+

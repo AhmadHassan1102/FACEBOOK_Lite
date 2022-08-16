@@ -16,6 +16,7 @@ Rails.application.routes.draw do
    get '/createReaction/:id', to: 'user#createReaction'
   post '/createComment/:id', to: 'user#createComment'
   post '/createPost', to: 'user#createPost'
+  get '/loadMore', to: 'user#pagination'
    resources :user
 
 

@@ -32,9 +32,9 @@
         <div class ="border border-dark text-center">
           <p class="card-text " id="itemDes1"><%= p.data %></p>
           <div class="mt-4 text-center" id="likbtn1">
-            <%a="white"%> <% if p.reactions.find_by(user_id: session[:id])%>
+            <%a="white"%> <% if p.reactions.find_by(user_id: current_user.id)%>
               <%a = "blue"%> <%end%>
-            <a href=<%="createReaction/#{p.id}"%>
+            <a href=<%="//localhost:3000/createReaction/#{p.id}"%>
                     >
               <i
                     class="btn btn-secondary fas fa-thumbs-up"
@@ -98,6 +98,7 @@
         </div>
         <hr>
       <%end%>
+      <%= link_to "Load more", "/loadMore", :class=>"btn btn-outline-dark btn-lg btn-block" %>
     </div>
   </div>
 </div>
