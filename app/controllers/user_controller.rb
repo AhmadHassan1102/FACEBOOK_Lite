@@ -1,55 +1,19 @@
+
 class UserController < ApplicationController
   skip_before_action :verify_authenticity_token
   before_action :authenticate_user!
-  attr_accessor :posts_limit
+  P_LIMIT = 15
   
   def index   
-    # if session[:id]
       session[:pageNo] = 0
-      @posts = Post.all.order(updated_at: :desc).limit(8).offset(session[:pageNo]*8)
-    # else
-    # redirect_to "/login"
-    # end
+      @posts = Post.includes(:comments,:user,:reactions).limit(P_LIMIT).order(updated_at: :desc).offset(session[:pageNo]*P_LIMIT)
+    
   end
   def pagination
     session[:pageNo] += 1
-    @posts = Post.all.order(updated_at: :desc).limit(8).offset(session[:pageNo]*8)
+    @posts = Post.includes(:comments,:user,:reactions).limit(P_LIMIT).order(updated_at: :desc).offset(session[:pageNo]*P_LIMIT)
     render "index"
   end
-  # def register
-  #   render "register", layout: "for_login"
-  # end
-
-  # def saveUser 
-  #   @user=User.new(email: params[:email], password: params[:password])
-  #   if @user.valid?
-  #     @user.save
-  #     redirect_to "/login"
-  #   else
-  #     redirect_to "/register"
-  #   end
-  # end
-  
-  # def verifyuser
-  #   @user = User.find_by(email: params[:user][:email], password: params[:user][:password])
-  #   if @user
-  #     session[:id] = @user.id
-  #     redirect_to user_index_path(@user)
-  #   else
-  #     redirect_to "/login"
-  #   end
-    
-  # end
-
-  # def login   # login page
-  #   @user = User.new
-  #   render "login", layout: "for_login"
-  # end
-
-  # def destroy
-  #   session[:id] = nil     
-  #   redirect_to '/login' 
-  # end 
 
   def show    
       @user = current_user
@@ -61,7 +25,7 @@ class UserController < ApplicationController
     else
       Reaction.create(user_id: current_user.id, post_id: params[:id])
     end
-    @posts = Post.all.order(updated_at: :desc).limit(8).offset(session[:pageNo]*8)
+    @posts = Post.includes(:comments,:user,:reactions).limit(P_LIMIT).order(updated_at: :desc).offset(session[:pageNo]*P_LIMIT)
     render "index"
   end
   def createComment
