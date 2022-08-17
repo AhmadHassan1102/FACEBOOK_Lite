@@ -1,0 +1,33 @@
+
+<% f = current_user.friends %>
+<% r = current_user.friend_requests%>
+<% @user.each do |u| %>
+ <form action="/friend_requests" method="post">
+    <input type="hidden" name="friend_id" value=<%= "#{u.id}" %> />
+     <div class="input-group mb-3">
+        <label> <%= u.email %><label>
+        <div class="input-group-append">
+            <% a = 1 %>
+            <% f.each do |i| %>
+              <%if i.friend_id == u.id %>
+              <% a = 0%>
+              <label class="input-group-text" id="basic-addon2" > Added</label>  
+              <%end%>
+            <% end %>
+            <% r.each do |i| %>
+              <%if i.friend_id == u.id %>
+                <% a = 0 %> 
+                <label class="input-group-text" id="basic-addon2" > Requested</label>  
+                <%= link_to "Undo","/friend_requests/#{r.find_by(friend_id: u.id).id}", data: {
+                turbo_method: :delete,
+                } %>  
+              <%end%>
+            <% end %>
+            <% if a == 1 %>
+            <button class="input-group-text" id="basic-addon2" type="submit" > Add Friend</button>
+            <%end%>           
+
+        </div>
+     </div>
+</form>
+<% end %>

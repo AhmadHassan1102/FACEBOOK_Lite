@@ -1,0 +1,15 @@
+<% @requests.each do |r| %>
+    <form action="/friends" method="post">
+        <input type="hidden" name="id" value=<%= "#{r.id}" %> />
+        <div class="input-group mb-3">
+            <label> <%= r.user.email %><label>
+            <div class="input-group-append">
+                <button class="input-group-text" id="basic-addon2" > Accept</button> 
+            <%= link_to "Reject","/friend_requests/#{r.id}", data: {
+                turbo_method: :delete,
+                turbo_confirm: "Are you sure?"
+                } %> 
+            </div>
+        </div>
+    </form>
+<% end %>  

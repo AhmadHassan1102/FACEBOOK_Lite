@@ -7,4 +7,5 @@ class User < ApplicationRecord
     has_many :reactions, dependent: :destroy
     has_many :friends, dependent: :destroy
     has_many :comments, dependent: :destroy
+    has_many :friend_requests, dependent: :destroy
 end
