@@ -85,9 +85,7 @@ test:
 production:
   <<: *default
   Host: ec2-52-207-15-147.compute-1.amazonaws.com
-database: 'dd4umt91ds4d84'
+database: dd4umt91ds4d84
 username: hegzrspzojftjy
 port: 5432
 password:  996e570d99f65d7a2adb8eb252f027a2b9d680bce07d248efdb3fba1005332ff
-URI: postgres://hegzrspzojftjy:996e570d99f65d7a2adb8eb252f027a2b9d680bce07d248efdb3fba1005332ff@ec2-52-207-15-147.compute-1.amazonaws.com:5432/dd4umt91ds4d84
-Heroku CLI: heroku pg:psql postgresql-cubed-82890 --app facebooklite11
