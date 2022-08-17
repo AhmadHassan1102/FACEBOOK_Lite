@@ -37,5 +37,11 @@ class UserController < ApplicationController
     Post.create(user_id: current_user.id,data: params[:data])
     redirect_to "/user"
   end
+  def makefriends
+    @user = User.includes(:friend_requests,:friends).where.not(id: current_user.id)
+  end
+  def friendrequests
+    @requests = FriendRequest.where(friend_id: current_user.id)
+  end
 end
 

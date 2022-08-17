@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'friends/new'
   # devise_for :users, controllers: { sessions: 'users/sessions' }
   devise_for :users
   
@@ -11,7 +12,11 @@ Rails.application.routes.draw do
   post '/createComment/:id', to: 'user#createComment'
   post '/createPost', to: 'user#createPost'
   get '/loadMore', to: 'user#pagination'
+  get '/makefriends', to: 'user#makefriends'
+  get '/friendrequests', to: 'user#friendrequests'
    resources :user
+   resources :friend_requests
+   resources :friends
 
 
 end

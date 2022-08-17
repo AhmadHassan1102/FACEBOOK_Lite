@@ -1,0 +1,11 @@
+<% @friends.each do |f| %>
+        <div class="input-group mb-3">
+            <label> <%= User.find(f.friend_id).email %><label>
+            <div class="input-group-append">
+                <%= link_to "Unfriend","/friends/#{f.friend_id}", :class=> "input-group-text", data: {
+                turbo_method: :delete,
+                turbo_confirm: "Are you sure"
+                }%>
+            </div>
+        </div>
+<% end %>  
