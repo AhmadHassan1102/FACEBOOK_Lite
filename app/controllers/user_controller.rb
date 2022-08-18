@@ -6,12 +6,14 @@ class UserController < ApplicationController
   
   def index   
       session[:pageNo] = 0
-      @posts = Post.includes(:comments,:user,:reactions).limit(P_LIMIT).order(updated_at: :desc).offset(session[:pageNo]*P_LIMIT)
+      @curr_friends=current_user.friends
+      @posts = Post.where(user_id: [@curr_friends.select(:friend_id)]).includes(:comments,:user,:reactions).limit(P_LIMIT).order(updated_at: :desc).offset(session[:pageNo]*P_LIMIT)
     
   end
   def pagination
     session[:pageNo] += 1
-    @posts = Post.includes(:comments,:user,:reactions).limit(P_LIMIT).order(updated_at: :desc).offset(session[:pageNo]*P_LIMIT)
+    @curr_friends=current_user.friends
+    @posts = Post.where(user_id: [@curr_friends.select(:friend_id)]).includes(:comments,:user,:reactions).limit(P_LIMIT).order(updated_at: :desc).offset(session[:pageNo]*P_LIMIT)
     render "index"
   end
 
@@ -25,7 +27,8 @@ class UserController < ApplicationController
     else
       Reaction.create(user_id: current_user.id, post_id: params[:id])
     end
-    @posts = Post.includes(:comments,:user,:reactions).limit(P_LIMIT).order(updated_at: :desc).offset(session[:pageNo]*P_LIMIT)
+    @curr_friends=current_user.friends
+    @posts = Post.where(user_id: [@curr_friends.select(:friend_id)]).includes(:comments,:user,:reactions).limit(P_LIMIT).order(updated_at: :desc).offset(session[:pageNo]*P_LIMIT)
     render "index"
   end
   def createComment

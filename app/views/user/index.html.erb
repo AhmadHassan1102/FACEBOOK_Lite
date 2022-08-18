@@ -64,7 +64,7 @@
                       <p><%=c.user.email%>: <%= c.data%></p>
                     <%end%>
                   </div>
-                  <form action=<%="createComment/#{p.id}" %>
+                  <form action=<%="//localhost:3000/createComment/#{p.id}" %>
                         method="post">
                     <input type="hidden"
                             name="authenticity_token"
